@@ -1,0 +1,50 @@
+/* custom additions for portfolio */
+.about-me { align-items: center; margin-top: 3rem; margin-bottom: 3rem; }
+.about-me__photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 25%;
+  border-radius: 12px; display: block; }
+.about-me__text p:first-child { font-size: 2.4rem; font-weight: 600; margin-bottom: .4rem; }
+.about-me__small { margin-top: 1.2rem; color: #777; }
+.client-name { display: flex; align-items: center; justify-content: center; min-height: 8rem;
+  font-weight: 600; font-size: 2rem; text-align: center; }
+
+/* every grid thumbnail has the same size */
+.uniform-bricks .brick, .uniform-bricks .grid-sizer,
+.certs-bricks .brick, .certs-bricks .grid-sizer { width: 33.3333%; }
+.bricks-wrapper .entry__thumb { aspect-ratio: 4 / 3; position: relative; overflow: hidden;
+  isolation: isolate; background: #111; }
+.bricks-wrapper .entry__thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.bricks-wrapper .entry--contain .entry__thumb img { object-fit: contain; object-position: center; position: relative; }
+@media (max-width: 800px) {
+  .uniform-bricks .brick, .uniform-bricks .grid-sizer,
+  .certs-bricks .brick, .certs-bricks .grid-sizer { width: 50%; } }
+@media (max-width: 500px) {
+  .uniform-bricks .brick, .uniform-bricks .grid-sizer,
+  .certs-bricks .brick, .certs-bricks .grid-sizer { width: 100%; } }
+.modal-popup img + img { margin-top: 1rem; }
+.bricks-wrapper .entry__thumb .entry__bg { display: none; }
+.bricks-wrapper .entry--contain .entry__thumb .entry__bg { display: block; position: absolute; top: -30px; left: -30px;
+  width: calc(100% + 60px); height: calc(100% + 60px); object-fit: cover; filter: blur(22px) brightness(.55); z-index: -1; }
+
+/* info boxes (About, Services, Non-Tech) */
+.info-card { background: #fff; border: 1px solid #ececec; border-radius: 16px; padding: 2.8rem 3rem;
+  height: 100%; box-shadow: 0 6px 24px rgba(0, 0, 0, .05); transition: transform .25s, box-shadow .25s, border-color .25s; }
+.info-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0, 0, 0, .10); border-color: #f26522; }
+.info-card .list-block__text p:last-child { margin-bottom: 0; }
+.process-list .list-block__item, .services-list .list-block__item { margin-bottom: 2.4rem; }
+
+/* Hero title: text photo par na jaye, dark panel ke andar rahe */
+@media (min-width: 1001px) {
+    .s-intro__content-title {
+        font-size: clamp(3.2rem, 4vw, 6.4rem);
+        max-width: 55%;
+    }
+}
+
+/* About: right side ki info box mein */
+#about .section-header__secondary .desc {
+    padding: 2.4rem 2.8rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    background: #fafafa;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
