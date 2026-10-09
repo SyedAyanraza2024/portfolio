@@ -10,10 +10,10 @@
 /* every grid thumbnail has the same size */
 .uniform-bricks .brick, .uniform-bricks .grid-sizer,
 .certs-bricks .brick, .certs-bricks .grid-sizer { width: 33.3333%; }
-.bricks-wrapper .entry__thumb { aspect-ratio: 4 / 3; position: relative; overflow: hidden;
+.bricks-wrapper .entry__thumb, .intern-media .entry__thumb { aspect-ratio: 4 / 3; position: relative; overflow: hidden;
   isolation: isolate; background: #111; }
-.bricks-wrapper .entry__thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-.bricks-wrapper .entry--contain .entry__thumb img { object-fit: contain; object-position: center; position: relative; }
+.bricks-wrapper .entry__thumb img, .intern-media .entry__thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.bricks-wrapper .entry--contain .entry__thumb img, .intern-media .entry--contain .entry__thumb img { object-fit: contain; object-position: center; position: relative; }
 @media (max-width: 800px) {
   .uniform-bricks .brick, .uniform-bricks .grid-sizer,
   .certs-bricks .brick, .certs-bricks .grid-sizer { width: 50%; } }
@@ -21,8 +21,8 @@
   .uniform-bricks .brick, .uniform-bricks .grid-sizer,
   .certs-bricks .brick, .certs-bricks .grid-sizer { width: 100%; } }
 .modal-popup img + img { margin-top: 1rem; }
-.bricks-wrapper .entry__thumb .entry__bg { display: none; }
-.bricks-wrapper .entry--contain .entry__thumb .entry__bg { display: block; position: absolute; top: -30px; left: -30px;
+.bricks-wrapper .entry__thumb .entry__bg, .intern-media .entry__thumb .entry__bg { display: none; }
+.bricks-wrapper .entry--contain .entry__thumb .entry__bg, .intern-media .entry--contain .entry__thumb .entry__bg { display: block; position: absolute; top: -30px; left: -30px;
   width: calc(100% + 60px); height: calc(100% + 60px); object-fit: cover; filter: blur(22px) brightness(.55); z-index: -1; }
 
 /* info boxes (About, Services, Non-Tech) */
@@ -32,19 +32,54 @@
 .info-card .list-block__text p:last-child { margin-bottom: 0; }
 .process-list .list-block__item, .services-list .list-block__item { margin-bottom: 2.4rem; }
 
-/* Hero title: text photo par na jaye, dark panel ke andar rahe */
-@media (min-width: 1001px) {
-    .s-intro__content-title {
-        font-size: clamp(3.2rem, 4vw, 6.4rem);
-        max-width: 55%;
-    }
+/* internships: vertical cards, photos with gaps, description below */
+.intern-card { height: auto; margin-bottom: 4rem; }
+.intern-card:hover { transform: none; }
+.intern-date { color: #f26522; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; font-size: 1.3rem; }
+.intern-title { margin: .6rem 0 0; }
+.intern-media { display: flex; flex-wrap: wrap; gap: 2.4rem; margin: 2.4rem 0; }
+.intern-tile { flex: 0 0 calc(50% - 1.2rem); max-width: calc(50% - 1.2rem); width: auto; float: none; position: relative; }
+.intern-tile .entry__link { display: block; border-radius: 12px; overflow: hidden; }
+.intern-text ul { margin: 0; padding-left: 2rem; list-style: disc; }
+.intern-text li { margin-bottom: 1rem; }
+.intern-tech { font-weight: 600; color: #555; }
+@media (max-width: 700px) { .intern-tile { flex: 0 0 100%; max-width: 100%; } }
+
+/* Projects / Certificates / Non-Tech: one tile per row, stacked vertically (no overlap) */
+.bricks-wrapper { position: static !important; height: auto !important; display: flex !important;
+  flex-direction: column; align-items: center; gap: 3rem; }
+.bricks-wrapper .grid-sizer { display: none !important; }
+.bricks-wrapper .brick, .bricks-wrapper .entry { position: static !important; left: auto !important; top: auto !important;
+  float: none !important; width: 100% !important; max-width: 760px; margin: 0 !important; }
+.bricks-wrapper .entry__link { display: block; border-radius: 12px; overflow: hidden; }
+
+/* resume buttons */
+.s-intro__content-buttons .btn + .btn { margin-left: 1.6rem; }
+.about-me__resume { margin-top: 1.6rem; }
+@media (max-width: 500px) { .s-intro__content-buttons .btn + .btn { margin-left: 0; margin-top: 1.2rem; } }
+
+/* project demo video in popup */
+.modal-popup video { width: 100%; display: block; margin-top: 1rem; background: #000; }
+
+/* hero: keep all text in one place on the left, away from the image */
+.s-intro { --intro-img: 500px; }
+.s-intro__content-inner { max-width: calc(100% - var(--intro-img) - 4rem); }
+.s-intro__content-title { --text-title-size: 7rem; padding-right: 0; margin-bottom: 2rem; }
+.s-intro__content-sub { font-size: 2.2rem; line-height: 1.6; color: rgba(255, 255, 255, .8);
+  max-width: 52rem; margin: 0 0 3.2rem; position: relative; z-index: 2;
+  opacity: 0; transform: translate(0, 100%);
+  transition: opacity .8s cubic-bezier(.28,.12,.22,1) .9s, transform .8s cubic-bezier(.28,.12,.22,1) .9s; }
+.s-intro__content-sub strong { color: #fff; font-weight: 600; }
+.ss-show .s-intro__content-sub, .no-js .s-intro__content-sub { opacity: 1; transform: translate(0, 0); }
+@media (max-width: 1400px) { .s-intro { --intro-img: 440px; } }
+@media (max-width: 900px) { .s-intro { --intro-img: 420px; } }
+@media (max-width: 800px) {
+  .s-intro__content-inner { max-width: 100%; }
+  .s-intro__content-bg { filter: brightness(.3); }
+  .s-intro__content-sub { font-size: 1.8rem; }
 }
 
-/* About: right side ki info box mein */
-#about .section-header__secondary .desc {
-    padding: 2.4rem 2.8rem;
-    border: 1px solid #d9d9d9;
-    border-radius: 8px;
-    background: #fafafa;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-}
+/* hero buttons wrap instead of overflowing on small screens */
+.s-intro__content-buttons { display: flex; flex-wrap: wrap; gap: 1.2rem 1.6rem; }
+.s-intro__content-buttons .btn + .btn { margin-left: 0 !important; margin-top: 0 !important; }
+.s-intro__content-buttons .btn { margin-right: 0 !important; }
